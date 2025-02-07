@@ -34,9 +34,9 @@ const defaultAppData: IData = storage.getItemFromLocalStorage<IData>("appData", 
 export const appData: IData = $state({
     // Use get/set to access properties so that we can saved to local storage when the values mutate.
     get raceType(): number { return this._raceType; }, set raceType(value: number) { this._raceType = value; appDataMutated(); },
-    get raceLaps(): number { return this._raceLaps; }, set raceLaps(value: number) { this.raceLaps = value; appDataMutated(); },
-    get maxRaceTimeBoost(): boolean { return this._maxRaceTimeBoost; }, set maxRaceTimeBoost(value: boolean) { this._maxRaceTimeBoost = value; appDataMutated(); },
+    get raceLaps(): number { return this._raceLaps; }, set raceLaps(value: number) { this._raceLaps = value; appDataMutated(); },
     get raceTime(): number { return this._raceTime; }, set raceTime(value: number) { this._raceTime = value; appDataMutated(); },
+    get maxRaceTimeBoost(): boolean { return this._maxRaceTimeBoost; }, set maxRaceTimeBoost(value: boolean) { this._maxRaceTimeBoost = value; appDataMutated(); },
     get formationLap(): boolean { return this._formationLap; }, set formationLap(value: boolean) { this._formationLap = value; appDataMutated(); },
     get cooldownLap(): boolean { return this._cooldownLap; }, set cooldownLap(value: boolean) { this._cooldownLap = value; appDataMutated(); },
     get averageLapTime(): number { return this._averageLapTime; }, set averageLapTime(value: number) { this._averageLapTime = value; appDataMutated(); },
@@ -48,9 +48,9 @@ export const appData: IData = $state({
     
     // Set the starting values from the default app data (which is either defaulted or whatever the last values were from local storage).
     _raceType: defaultAppData.raceType,
-    _maxRaceTimeBoost: defaultAppData.maxRaceTimeBoost,
     _raceLaps: defaultAppData.raceLaps,
     _raceTime: defaultAppData.raceTime,
+    _maxRaceTimeBoost: defaultAppData.maxRaceTimeBoost,
     _formationLap: defaultAppData.formationLap,
     _cooldownLap: defaultAppData.cooldownLap,
     _averageLapTime: defaultAppData.averageLapTime,

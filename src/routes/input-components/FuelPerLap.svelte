@@ -19,25 +19,40 @@
         if (appData.maxFuelPerLapBoost === true && appData.fuelPerLap > LOWER_MAX)
             appData.fuelPerLap = LOWER_MAX;
     }
+
+    function decrease() {
+        if (appData.fuelPerLap > MIN)
+            appData.fuelPerLap --;
+    }
+    function increase() {
+        if (appData.fuelPerLap < fuelPerLapMax)
+            appData.fuelPerLap ++;
+    }
 </script>
 
-<div class="slider-field-container">
-    <div class="slider-info-bar">
-        <label for="fuel-per-lap-input">Fuel Per Lap</label>
-        <div class="toggle-switch-and-output">
-            <div class="toggle-switch-field">
-                <label for="max-fuel-per-lap"></label>
-                <label class="switch">
-                    <input type="checkbox" role="switch" id="max-fuel-per-lap" bind:checked={appData.maxFuelPerLapBoost} onclick={onMaxFuelPerLapToggled}>
-                    <span class="slider"></span>
-                </label>
+<div class="field-with-spinners-container">
+    <div class="slider-field-container">
+        <div class="slider-info-bar">
+            <label for="fuel-per-lap-input">Fuel Per Lap</label>
+            <div class="toggle-switch-and-output">
+                <div class="toggle-switch-field">
+                    <label for="max-fuel-per-lap"></label>
+                    <label class="switch">
+                        <input type="checkbox" role="switch" id="max-fuel-per-lap" bind:checked={appData.maxFuelPerLapBoost} onclick={onMaxFuelPerLapToggled}>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                <span class="field-output">{fuelPerLap()}</span>
             </div>
-            <span class="field-output">{fuelPerLap()}</span>
         </div>
+        <div class="range-field">
+            <input type="range" id="fuel-per-lap-input" min="{MIN}" max="{fuelPerLapMax}" bind:value={appData.fuelPerLap} style="{fuelPerLapStyle()}" />
+        </div> 
     </div>
-    <div class="range-field">
-        <input type="range" id="fuel-per-lap-input" min="{MIN}" max="{fuelPerLapMax}" bind:value={appData.fuelPerLap} style="{fuelPerLapStyle()}" />
-    </div> 
+    <div class="value-spinner">
+        <button type="button" onclick={decrease} aria-label="Decrease fuel per lap"></button>
+        <button type="button" onclick={increase} aria-label="Increase fuel per lap"></button>
+    </div>
 </div>
 
 <style>

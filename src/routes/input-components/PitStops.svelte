@@ -23,6 +23,24 @@
         
         return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
     });
+
+    function decreaseStopCount() {
+        if (appData.pitStopCount > MIN_PITSTOP_COUNT)
+            appData.pitStopCount --;
+    }
+    function increaseStopCount() {
+        if (appData.pitStopCount < MAX_PITSTOP_COUNT)
+            appData.pitStopCount ++;
+    }
+
+    function decreaseTime() {
+        if (appData.pitStopTime > MIN_PITSTOP_TIME)
+            appData.pitStopTime --;
+    }
+    function increaseTime() {
+        if (appData.pitStopTime < MAX_PITSTOP_TIME)
+            appData.pitStopTime ++;
+    }
 </script>
 
 <div class="accordion" id="pit-stop-accordian" >
@@ -33,22 +51,34 @@
             <span class="field-output white-space-nowrap {appData.pitStopCount === 0 ? 'muted' : ''}">{pitStopCount()}</span>
         </label>
         <div class="accordion-item-body">
-            <div class="slider-field-container">
-                <div class="slider-info-bar">
-                    <label for="average-lap-time-input">Time Lost Per Stop</label>
-                    <span class="field-output {appData.pitStopCount === 0 ? 'muted' : ''}">{pitStopTime()}</span>
+            <div class="field-with-spinners-container">
+                <div class="slider-field-container">
+                    <div class="slider-info-bar">
+                        <label for="average-lap-time-input">Time Lost Per Stop</label>
+                        <span class="field-output {appData.pitStopCount === 0 ? 'muted' : ''}">{pitStopTime()}</span>
+                    </div>
+                    <div class="range-field">
+                        <input type="range" id="pit-stop-time-input" min="{MIN_PITSTOP_TIME}" max="{MAX_PITSTOP_TIME}" bind:value={appData.pitStopTime} disabled={pitStopTimeDisabled} style="{pitStopTimeStyle()}"/> 
+                    </div>
                 </div>
-                <div class="range-field">
-                    <input type="range" id="pit-stop-time-input" min="{MIN_PITSTOP_TIME}" max="{MAX_PITSTOP_TIME}" bind:value={appData.pitStopTime} disabled={pitStopTimeDisabled} style="{pitStopTimeStyle()}"/> 
+                <div class="value-spinner">
+                    <button type="button" onclick={decreaseTime} disabled={pitStopTimeDisabled} aria-label="Decrease pit stop time"></button>
+                    <button type="button" onclick={increaseTime} disabled={pitStopTimeDisabled} aria-label="Increase pit stop time"></button>
                 </div>
             </div>
-            <div class="slider-field-container">
-                <div class="slider-info-bar">
-                    <label for="pit-stop-count-input">Stop Count</label>
-                    <span class="field-output {appData.pitStopCount === 0 ? 'muted' : ''}">{pitStopCount()}</span>
+            <div class="field-with-spinners-container">
+                <div class="slider-field-container">
+                    <div class="slider-info-bar">
+                        <label for="pit-stop-count-input">Stop Count</label>
+                        <span class="field-output {appData.pitStopCount === 0 ? 'muted' : ''}">{pitStopCount()}</span>
+                    </div>
+                    <div class="range-field">
+                        <input type="range" min="{MIN_PITSTOP_COUNT}" max="{MAX_PITSTOP_COUNT}" bind:value={appData.pitStopCount} style="{pitStopCountStyle()}"/> 
+                    </div>
                 </div>
-                <div class="range-field">
-                    <input type="range" min="{MIN_PITSTOP_COUNT}" max="{MAX_PITSTOP_COUNT}" bind:value={appData.pitStopCount} style="{pitStopCountStyle()}"/> 
+                <div class="value-spinner">
+                    <button type="button" onclick={decreaseStopCount} aria-label="Decrease pit stop count"></button>
+                    <button type="button" onclick={increaseStopCount} aria-label="Increase pit stop count"></button>
                 </div>
             </div>
         </div>

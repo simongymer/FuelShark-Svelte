@@ -27,11 +27,11 @@
 </div>
 
 <style>
-    #data-input,
+    /* #data-input,
     #data-output {
         border-radius: 0.375rem;
         border: 1px solid rgb(73 80 87 / 65%);
-    }
+    } */
 
     #data-output {
         margin-top: .5em;
