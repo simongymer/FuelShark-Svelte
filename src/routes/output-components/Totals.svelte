@@ -5,11 +5,7 @@
     let { appData } : { appData: IData } = $props();
 
     let totalFuel = $derived(() =>{
-            let laps = appData.raceLaps;
-            if (appData.formationLap === true)
-                laps ++;
-            if (appData.cooldownLap === true)
-                laps ++;
+            let laps = totalLaps();
             return (laps * (appData.fuelPerLap / 100));
         }
     );
